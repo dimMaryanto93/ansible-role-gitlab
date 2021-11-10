@@ -1,0 +1,15 @@
+---
+- name: Allow OpenSSH
+  community.general.ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Allow http
+  community.general.ufw:
+    rule: allow
+    name: http
+
+- name: Allow https
+  community.general.ufw:
+    rule: allow
+    name: https

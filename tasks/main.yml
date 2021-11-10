@@ -1,0 +1,41 @@
+---
+# tasks file for ansible-role-gitlab-example
+- name: Requirement & Prequisites to install Gitlab
+  block: 
+    - name: Install dependencies on Ubuntu
+      include_tasks: ubuntu/prerequisite.yaml
+      when: ansible_os_family == 'Debian'
+
+- name: Install Gitlab package
+  block: 
+    - name: Check if GitLab configuration file already exists.
+      stat: 
+        path: /etc/gitlab/gitlab.rb
+      register: gitlab_config_file
+
+    - name: Check if GitLab is already installed.
+      stat: 
+        path: /usr/bin/gitlab-ctl
+      register: gitlab_file
+
+    - name: Install Gitlab on Ubuntu
+      include_tasks: ubuntu/install.yaml
+      when: ansible_os_family == 'Debian'
+
+- name: Post Install Gitlab package
+  block:
+    - name: Reconfigure GitLab (first run).
+      command: gitlab-ctl reconfigure
+      failed_when: false
+
+    - name: Copy root password to local
+      local_action:
+        module: file
+        src: /etc/gitlab/initial_root_password
+        dest: ".files/initial_root_password.txt"
+
+- name: Firewall config allow gitlab access outside
+  block:
+    - name: UFW config
+      include_tasks: ubuntu/ufw-cmd.yaml
+      when: ansible_os_family == 'Debian'
