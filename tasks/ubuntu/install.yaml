@@ -12,11 +12,7 @@
   when: not gitlab_file.stat.exists
 
 - name: Install Gitlab
-  apt:
+  package:
     name: "gitlab-ce"
     state: latest
-  environtment:
-    EXTERNAL_URL: "{{ gitlab_external_url }}"
-  async: 300
-  poll: 5
   when: not gitlab_file.stat.exists
