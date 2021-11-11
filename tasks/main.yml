@@ -28,11 +28,15 @@
       command: gitlab-ctl reconfigure
       failed_when: false
 
-    - name: Copy root password to local
-      local_action:
-        module: file
-        src: /etc/gitlab/initial_root_password
-        dest: ".files/initial_root_password.txt"
+    - name: get info init root password for gitlab
+      shell: "cat /etc/gitlab/initial_root_password | grep 'Password: ' | awk '{print $2}'"
+      register: init_root_password
+      when: gitlab_root_password_print
+
+    - name: Debug root password
+      debug: 
+        msg: "{{ init_root_password.stdout }}"
+      when: gitlab_root_password_print
 
 - name: Firewall config allow gitlab access outside
   block:
