@@ -15,7 +15,8 @@ galaxy_info:
       - 8
   - name: Ubuntu
     versions:
-      - 20.04
+      - bionic
+      - focal
 
   galaxy_tags: 
     - version_control
