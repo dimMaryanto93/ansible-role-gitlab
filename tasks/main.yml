@@ -1,5 +1,14 @@
 ---
 # tasks file for ansible-role-gitlab-example
+- name: Load a variable file based on the OS type
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - '{{ansible_os_family}}.yaml'
+      paths:
+        - 'vars'
+
 - name: Requirement & Prequisites to install Gitlab
   block: 
     - name: Install dependencies on Ubuntu
@@ -18,9 +27,23 @@
         path: /usr/bin/gitlab-ctl
       register: gitlab_file
 
-    - name: Install Gitlab on Ubuntu
-      include_tasks: ubuntu/install.yaml
-      when: ansible_os_family == 'Debian'
+    - name: Download GitLab repository installation script.
+      get_url:
+        url: "https://packages.gitlab.com/install/repositories/gitlab/{{ gitlab_package_name }}/{{ gitlab_script_name }}"
+        dest: /tmp/gitlab.script.sh
+        validate_certs: true
+      when: not gitlab_file.stat.exists
+
+    - name: Install GitLab repository.
+      command: bash /tmp/gitlab.script.sh
+      register: output
+      when: not gitlab_file.stat.exists
+
+    - name: Install Gitlab
+      package:
+        name: "{{ gitlab_package_name }}"
+        state: latest
+      when: not gitlab_file.stat.exists
 
 - name: Post Install Gitlab package
   block:

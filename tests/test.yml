@@ -1,5 +1,7 @@
 ---
-- hosts: localhost
+- hosts: ["all"]
   become: true
+  vars:
+    gitlab_root_password_print: true
   roles:
     - ../../ansible-role-gitlab

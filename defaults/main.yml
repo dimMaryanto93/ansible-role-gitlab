@@ -1,4 +1,5 @@
 ---
+gitlab_package_name: gitlab-ce
 # defaults file for ansible-role-gitlab-example
 gitlab_external_url: "http://localhost"
 # TODO set to true if you want print root password in console ansible
