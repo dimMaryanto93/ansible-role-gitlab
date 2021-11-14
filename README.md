@@ -1,38 +1,84 @@
-Role Name
+`dimmaryanto93.gitlab-ce`
 =========
 
-A brief description of the role goes here.
+Repository ini digunakan untuk menginstall `gitlab` untuk Linux
+
+Support platform
+
+- Debian
+- Ubuntu
+- CentOS
+
+
+Ansible - User Guide
+------------
+
+Persiapan yang harus di lalukan, diantaranya
+
+1. Create new user on your server, Recomend using **very-very Strong Password** or using password generator. 
+  ```bash
+  adduser <username>
+  ```
+
+2. Granted to sudoers with NOPASSWD, using `visudo`
+  ```ini
+  username    ALL=(ALL) NOPASSWD:ALL
+  ```
+
+3. Authenticate with private-key for login ssh, generate ssh key on your local machine then use `ssh-copy-id user@your-ip-server` to copy public key to your server.
+
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Untuk menggunakan role ini, kita membutuhkan package/collection 
+
+- [ansible.posix](https://github.com/ansible-collections/ansible.posix)
+- [community.general](https://github.com/ansible-collections/community.general)
+
+Temen-temen bisa install, dengan cara 
+
+```bash
+ansible-galaxy collection install ansible.posix community.general
+```
+
+Atau temen-temen bisa menggunakan `requirement.yaml` file and install menggunakan `ansible-galaxy collection install -r requirement.yaml`, dengan format seperti berikut:
+
+```yaml
+---
+collections:
+  - community.general
+  - ansible.posix
+```
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Ada beberapa variable yang temen-temen bisa gunakan untuk setting docker daemon, diantaranya seperti berikut:
+
+| Variable name                 | Example value       | Description |
+| :---                          | :---                | :---        |
+| `gitlab_external_url`         | `http://localhost`  | Default value untuk gitlab operation seperti git pull, push, clone |
+| `gitlab_root_password_print`  | `false`             | Tampilkan generated root password for gitlab administrator account |
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```ansible
+- hosts: servers
+  become: true
+  roles:
+      - { role: dimmaryanto93.gitlab }
+```
 
 License
 -------
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+MIT
