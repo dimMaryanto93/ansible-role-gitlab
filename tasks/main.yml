@@ -43,6 +43,8 @@
       package:
         name: "{{ gitlab_package_name }}"
         state: latest
+      environment:
+        EXTERNAL_URL: "{{ gitlab_external_url }}"
       when: not gitlab_file.stat.exists
 
 - name: Post Install Gitlab package
