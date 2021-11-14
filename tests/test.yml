@@ -2,4 +2,4 @@
 - hosts: localhost
   become: true
   roles:
-    - dimmaryanto93.gitlab
+    - ../../ansible-role-gitlab
