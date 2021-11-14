@@ -19,9 +19,12 @@ galaxy_info:
       - focal
 
   galaxy_tags: 
-    - version_control
+    - versioncontrol
     - git
     - gitlab
+    - repository
+    - ci
+    - integration
 
 dependencies: []
   # List your role dependencies here, one per line. Be sure to remove the '[]' above,
