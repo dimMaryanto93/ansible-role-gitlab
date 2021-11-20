@@ -1,4 +1,4 @@
-`dimmaryanto93.gitlab-ce`
+`dimmaryanto93.gitlab`
 =========
 
 Repository ini digunakan untuk menginstall `gitlab` untuk Linux
