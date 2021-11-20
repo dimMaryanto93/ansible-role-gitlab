@@ -60,6 +60,8 @@ Ada beberapa variable yang temen-temen bisa gunakan untuk setting docker daemon,
 | :---                          | :---                | :---        |
 | `gitlab_external_url`         | `http://localhost`  | Default value untuk gitlab operation seperti git pull, push, clone |
 | `gitlab_root_password_print`  | `false`             | Tampilkan generated root password for gitlab administrator account |
+| `gitlab_init_shared_runner_registration_token` | `-`  | Set default token for registration gitlab runner |
+| `gitlab_init_root_password` | `-` | Set default password installation for gitlab root account |
 
 Dependencies
 ------------

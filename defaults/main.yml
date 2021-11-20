@@ -4,3 +4,5 @@ gitlab_package_name: gitlab-ce
 gitlab_external_url: "http://localhost"
 # TODO set to true if you want print root password in console ansible
 gitlab_root_password_print: false
+gitlab_init_root_password: default_password_root
+gitlab_init_shared_runner_registration_token: default_runner_token
