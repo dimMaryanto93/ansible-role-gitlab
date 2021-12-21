@@ -10,7 +10,6 @@
     - tzdata
     - perl
     - postfix
-    - gnupg2
 
 - name: Ensure postfix is started and enabled at boot.
   service:
