@@ -70,3 +70,7 @@
     - name: UFW config
       include_tasks: ubuntu/ufw-cmd.yaml
       when: ansible_os_family == 'Debian'
+    
+    - name: Firewalld config
+      include_tasks: redhat/firewalld-cmd.yaml
+      when: ansible_os_family == 'Debian'

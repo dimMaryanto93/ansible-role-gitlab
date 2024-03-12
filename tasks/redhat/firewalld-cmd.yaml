@@ -1,0 +1,22 @@
+---
+- name: Enable port 80
+  ansible.posix.firewalld:
+    zone: public
+    port: 80/tcp
+    permanent: yes
+    immediate: true
+    state: enabled
+- name: Enable port 443
+  ansible.posix.firewalld:
+    zone: public
+    port: 443/tcp
+    permanent: yes
+    immediate: true
+    state: enabled
+- name: Enable port 22
+  ansible.posix.firewalld:
+    zone: public
+    port: 22/tcp
+    permanent: yes
+    immediate: true
+    state: enabled
