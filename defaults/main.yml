@@ -1,8 +1,7 @@
 ---
 gitlab_package_name: gitlab-ce
-# defaults file for ansible-role-gitlab-example
-gitlab_external_url: "http://localhost"
+gitlab_external_url: "http://{{ ansible_facts['default_ipv4']['address'] }}"
 # TODO set to true if you want print root password in console ansible
 gitlab_root_password_print: false
 gitlab_init_root_password: default_password_root
-gitlab_init_shared_runner_registration_token: default_runner_token
+gitlab_init_shared_runner_registration_token: default-token-runner

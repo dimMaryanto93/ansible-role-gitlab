@@ -1,7 +1,11 @@
 ---
 - hosts: ["all"]
-  become: true
+  # become: true
   vars:
     gitlab_root_password_print: true
-  roles:
-    - ../../ansible-role-gitlab
+  tasks:
+    - name: debug
+      debug:
+        msg: "{{ ansible_facts['default_ipv4']['address'] }}"
+  # roles:
+  #   - ../../ansible-role-gitlab
