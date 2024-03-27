@@ -73,4 +73,4 @@
     
     - name: Firewalld config
       include_tasks: redhat/firewalld-cmd.yaml
-      when: ansible_os_family == 'Debian'
+      when: ansible_os_family == 'RedHat'
