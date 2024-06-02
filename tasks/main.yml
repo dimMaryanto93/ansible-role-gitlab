@@ -29,7 +29,7 @@
 
     - name: Download GitLab repository installation script.
       get_url:
-        url: "https://packages.gitlab.com/install/repositories/gitlab/{{ gitlab_package_name }}/{{ gitlab_script_name }}"
+        url: "https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/{{ gitlab_script_name }}"
         dest: /tmp/gitlab.script.sh
         validate_certs: true
       when: not gitlab_file.stat.exists
